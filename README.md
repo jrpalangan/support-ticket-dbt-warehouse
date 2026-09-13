@@ -13,7 +13,7 @@ transforming before loading) is the pattern dbt is purpose-built for, and
 matches how modern cloud data warehouses are typically used.
 
 ## Dataset
-[Customer Support Ticket Dataset](<https://www.kaggle.com/datasets/suraj520/customer-support-ticket-dataset?resource=download>) — ~8,469 
+[Customer Support Ticket Dataset](https://www.kaggle.com/datasets/suraj520/customer-support-ticket-dataset?resource=download) — ~8,469 
 customer support tickets for technology products, covering hardware, 
 software, billing, and account issues, with priority, channel, resolution 
 time, and satisfaction fields.
@@ -69,7 +69,7 @@ staying on the smallest warehouse that meets latency needs — scaling up
 here would only increase cost without improving performance.
 
 ## How to Run
-1. Load `data/customer_support_tickets.csv` into a Snowflake `RAW` schema (see `data/load_raw_to_snowflake.py`)
+1. Load `data/customer_support_tickets.csv` into a Snowflake `RAW` schema using Snowsight's "Load Data" wizard (Data → Databases → SUPPORT_DB → RAW → Create → Table → From File)
 2. `cd support_dbt_project`
 3. `dbt debug` — confirm connection
 4. `dbt run` — build all models
@@ -77,4 +77,4 @@ here would only increase cost without improving performance.
 6. `dbt docs generate && dbt docs serve` — view documentation and lineage
 
 ## Tech Stack
-Snowflake · dbt Core · SQL · Python
+Snowflake · dbt Core · SQL
