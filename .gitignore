@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+dbt-env/
+support_dbt_project/target/
+support_dbt_project/logs/
+support_dbt_project/dbt_packages/
