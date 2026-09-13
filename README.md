@@ -23,9 +23,8 @@ staging, since they weren't needed for any business question this project
 answers.
 
 ## Architecture
-
 - **Staging** (`stg_tickets`): light cleanup — renamed columns, typed casts, 
-  excluded PII fields
+  excluded PII (name and email) fields
 - **Marts**:
   - `resolution_time_by_priority` — average handling time and satisfaction by priority
   - `satisfaction_by_channel` — average satisfaction and volume by support channel
@@ -37,9 +36,9 @@ answers.
 ## Data Quality Note
 `First Response Time` and `Time to Resolution` are stored as timestamps, but 
 a significant number of rows show `Time to Resolution` earlier than 
-`First Response Time` — suggesting these fields may not represent strictly 
+`First Response Time` which means that these fields may not represent strictly 
 sequential events in this dataset. Affected rows are excluded from average 
-handling-time calculations (visible via an `excluded_negative_rows` column) 
+handling-time calculations (visible in the `excluded_negative_rows` column) 
 but retained in total ticket counts for transparency.
 
 ## Testing
@@ -58,15 +57,11 @@ and a Small Snowflake warehouse, running each 3 times to account for variance.
 | X-Small   | 37ms  | 36ms  | 36ms  | 36.33ms |
 | Small     | 38ms  | 37ms  | 37ms  | 37.33ms |
 
-**Finding:** At this dataset's scale (~8,500 rows), increasing warehouse size 
-produced no performance benefit — execution times were statistically 
-equivalent (within normal run-to-run variance), with Small even showing a 
-marginal increase. This reflects Snowflake's architecture: warehouse sizing 
-delivers benefits primarily for large-scale data volumes or high query 
-concurrency, where additional compute nodes can meaningfully parallelize 
-work. For small, single-query workloads like this one, right-sizing means 
-staying on the smallest warehouse that meets latency needs — scaling up 
-here would only increase cost without improving performance.
+**Finding:** This dataset with 8,500 rows barely benefits in the increasing warehouse size.
+The execution times were almost equivalent with Small even showing a marginal increase. 
+This reflects Snowflake's architecture in terms of warehouse sizing is mainly effective for 
+large-scale data volumes or high number of running queries. For small and single-query workloads 
+like this project, scaling up would only increase cost without significantly improving performance.
 
 ## How to Run
 1. Load `data/customer_support_tickets.csv` into a Snowflake `RAW` schema using Snowsight's "Load Data" wizard (Data → Databases → SUPPORT_DB → RAW → Create → Table → From File)
