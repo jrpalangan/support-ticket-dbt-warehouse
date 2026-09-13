@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: SUPPORT_DB
+    schema: RAW
+    tables:
+      - name: customer_support_tickets
+        description: "Raw customer support ticket data in technology products."

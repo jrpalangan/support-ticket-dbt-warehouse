@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_tickets
+    description: "Cleaned, typed staging model for raw support tickets. Excludes customer name/email fields."
+    columns:
+      - name: ticket_id
+        description: "Unique identifier for a support ticket."
+        tests:
+          - unique
+          - not_null
+      - name: ticket_priority
+        description: "Priority level assigned to the ticket."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Low', 'Medium', 'High', 'Critical']
+      - name: ticket_channel
+        description: "The channel used for ticket submission."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Email', 'Phone', 'Chat', 'Social media']
