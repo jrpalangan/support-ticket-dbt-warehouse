@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: resolution_time_by_priority
+    description: "Average handling time (first response to resolution) and satisfaction, by ticket priority. Excludes rows with chronologically inconsistent timestamps."
+  - name: satisfaction_by_channel
+    description: "Average satisfaction rating and ticket volume, by support channel."
+  - name: ticket_volume_by_product
+    description: "Ticket volume and satisfaction, by product purchased."
+  - name: ticket_type_resolution_summary
+    description: "Average handling time and satisfaction, by ticket type. Excludes rows with chronologically inconsistent timestamps."
